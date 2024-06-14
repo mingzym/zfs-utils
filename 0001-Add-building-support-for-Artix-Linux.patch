@@ -1,0 +1,46 @@
+diff --git a/config/zfs-build.m4 b/config/zfs-build.m4
+index bb5a85d81..76df7577e 100644
+--- a/config/zfs-build.m4
++++ b/config/zfs-build.m4
+@@ -522,6 +522,8 @@ AC_DEFUN([ZFS_AC_DEFAULT_PACKAGE], [
+ 			VENDOR=gentoo ;
+ 		elif test -f /etc/arch-release ; then
+ 			VENDOR=arch ;
++		elif test -f /etc/artix-release ; then
++			VENDOR=artix ;
+ 		elif test -f /etc/SuSE-release ; then
+ 			VENDOR=sles ;
+ 		elif test -f /etc/slackware-version ; then
+@@ -554,6 +556,7 @@ AC_DEFUN([ZFS_AC_DEFAULT_PACKAGE], [
+ 		redhat)     DEFAULT_PACKAGE=rpm  ;;
+ 		fedora)     DEFAULT_PACKAGE=rpm  ;;
+ 		gentoo)     DEFAULT_PACKAGE=tgz  ;;
++		artix)      DEFAULT_PACKAGE=tgz  ;;
+ 		alpine)     DEFAULT_PACKAGE=tgz  ;;
+ 		arch)       DEFAULT_PACKAGE=tgz  ;;
+ 		sles)       DEFAULT_PACKAGE=rpm  ;;
+@@ -580,6 +583,8 @@ AC_DEFUN([ZFS_AC_DEFAULT_PACKAGE], [
+ 	case "$VENDOR" in
+ 		gentoo|alpine)	DEFAULT_INIT_SHELL=/sbin/openrc-run
+ 				IS_SYSV_RC=false	;;
++		artix)		DEFAULT_INIT_SHELL=/usr/bin/openrc-run
++				IS_SYSV_RC=false	;;
+ 		*)		DEFAULT_INIT_SHELL=/bin/sh
+ 				IS_SYSV_RC=true		;;
+ 	esac
+@@ -599,6 +604,7 @@ AC_DEFUN([ZFS_AC_DEFAULT_PACKAGE], [
+ 	AC_MSG_CHECKING([default init config directory])
+ 	case "$VENDOR" in
+ 		alpine)     initconfdir=/etc/conf.d    ;;
++		artix)      initconfdir=/etc/conf.d    ;;
+ 		gentoo)     initconfdir=/etc/conf.d    ;;
+ 		toss)       initconfdir=/etc/sysconfig ;;
+ 		redhat)     initconfdir=/etc/sysconfig ;;
+@@ -629,6 +635,7 @@ AC_DEFUN([ZFS_AC_DEFAULT_PACKAGE], [
+ 		debian)     bashcompletiondir=/usr/share/bash-completion/completions   ;;
+ 		freebsd)    bashcompletiondir=$sysconfdir/bash_completion.d;;
+ 		gentoo)     bashcompletiondir=/usr/share/bash-completion/completions   ;;
++		artix)      bashcompletiondir=/usr/share/bash-completion/completions   ;;
+ 		*)          bashcompletiondir=/etc/bash_completion.d   ;;
+ 	esac
+ 	AC_MSG_RESULT([$bashcompletiondir])
